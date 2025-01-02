@@ -8,8 +8,39 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-        <div class="container">
-            
+
+        <dialog id="newBookDialog">
+            <form action="">
+                <div class="new-book-form">
+                    <div class="form-row">
+                        <label for="book-title">Book title:</label>
+                        <input type="text" name="book-title" id="book-title" required aria-required="true">
+                    </div>
+                    <div class="form-row">
+                        <label for="book-author">Book author:</label>
+                        <input type="text" name="book-author" id="book-author" required aria-required="true">
+                    </div>
+                    <div class="form-row">
+                        <label for="book-pages">Number of pages:</label>
+                        <input type="number" name="book-pages" id="book-pages">
+                    </div>
+                    <div class="form-row-choice">
+                        <p>Have you read this book?</p>
+                        <input type="radio" name="read-status" id="read-yes" value="true">
+                        <label for="read-yes">Yes</label>
+                        <input type="radio" name="read-status" id="read-no" value="false">
+                        <label for="read-no">No</label>
+                    </div>
+                    <div class="form-row">
+                        <button class="cancel-btn" type="button">Cancel</button>
+                        <button class="submit-btn">Add book</button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
+        <div class="container"></div>
+        <div class="new-button-container">
+            <button class="new-book-btn">+</button>
         </div>
 </body>
 </html>

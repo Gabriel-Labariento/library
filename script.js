@@ -11,9 +11,9 @@ function addBookToLibrary(book){
     myLibrary.push(book);
 }
 
-book1 = new Book("Pride and Prejudice", "Jane Austen", 279, false);
-book2 = new Book("1984", "George Orwell", 328, true);
-book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
+let book1 = new Book("Pride and Prejudice", "Jane Austen", 279, false);
+let book2 = new Book("1984", "George Orwell", 328, true);
+let book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
 
 addBookToLibrary(book1);
 addBookToLibrary(book2);
@@ -48,3 +48,12 @@ function displayBook(){
 }
 
 displayBook();
+
+const newBookButton = document.querySelector(".new-book-btn")
+
+newBookButton.addEventListener("click", newBook);
+
+function newBook(){
+    const dialog = document.querySelector("dialog");
+    dialog.showModal();
+}
