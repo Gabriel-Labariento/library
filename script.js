@@ -4,7 +4,11 @@ function Book(title, author, pages, hasRead){
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.hasRead = hasRead
+    this.hasRead = hasRead;
+
+    this.changeReadStatus = function(){
+        this.hasRead = !(this.hasRead);
+    }
 }
 
 function addBookToLibrary(book){
@@ -19,8 +23,12 @@ addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
 
-function displayBook(){
+function displayBooks(){
     let container = document.querySelector(".container");
+    
+    while(container.firstChild){
+        container.removeChild(container.firstChild);
+    }
 
     for (book of myLibrary){
         let card = document.createElement("div");
@@ -47,13 +55,27 @@ function displayBook(){
     }
 }
 
-displayBook();
+displayBooks();
 
 const newBookButton = document.querySelector(".new-book-btn")
+const dialog = document.querySelector("dialog");
+const bookTitle = dialog.querySelector("input[name='book-title']");
+const bookAuthor = dialog.querySelector("input[name='book-author']");
+const bookPages = dialog.querySelector("input[name='book-pages']");
+const readStatus = dialog.querySelector("input[name='read-status']");
+const newBookForm = document.querySelector("form");
+const cancelBtn = dialog.querySelector(".cancel-btn");
+const submitBtn = dialog.querySelector(".submit-btn");
 
-newBookButton.addEventListener("click", newBook);
+newBookButton.addEventListener("click", () => dialog.showModal());
+cancelBtn.addEventListener("click", () => dialog.close());
 
-function newBook(){
-    const dialog = document.querySelector("dialog");
-    dialog.showModal();
-}
+submitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    let newBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readStatus.value);
+    dialog.close();
+    addBookToLibrary(newBook);
+    displayBooks();
+})
+
+

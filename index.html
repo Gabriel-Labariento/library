@@ -9,8 +9,8 @@
 </head>
 <body>
 
-        <dialog id="newBookDialog">
-            <form action="">
+        <dialog id="new-book-dialog">
+            <form formmethod="dialog" action="">
                 <div class="new-book-form">
                     <div class="form-row">
                         <label for="book-title">Book title:</label>
@@ -32,8 +32,8 @@
                         <label for="read-no">No</label>
                     </div>
                     <div class="form-row">
-                        <button class="cancel-btn" type="button">Cancel</button>
-                        <button class="submit-btn">Add book</button>
+                        <button class="cancel-btn" type="button" value="cancel">Cancel</button>
+                        <button class="submit-btn" value="default">Add book</button>
                     </div>
                 </div>
             </form>
