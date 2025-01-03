@@ -76,7 +76,7 @@
     background-color: var(--darkBlue);
     border-radius: 20px;
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     padding: 20px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: var(--white);
@@ -175,4 +175,22 @@ input {
   border-radius: 5px;
   border: 1px solid #172554;
   outline: none;
+}
+
+.remove-btn {
+  border: #fff1f2;
+  border-radius: 5px;
+  float: right;
+}
+
+.remove-btn:hover{
+  cursor: pointer;
+}
+
+.title-text{
+  color:#172554;
+  min-height: 8vh;
+  max-height: fit-content;
+  padding: 20px;
+  box-shadow: 0px 0px 20px 0px rgba(23,37,84,1);
 }
