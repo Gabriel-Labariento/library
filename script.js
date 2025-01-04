@@ -25,31 +25,45 @@ function displayBooks(){
     for (book of myLibrary){
         let card = document.createElement("div");
         card.setAttribute("class", "card");
+
         card.dataset.bookNumber = myLibrary.indexOf(book);
 
         let titleContainer = document.createElement("div");
         let authorContainer = document.createElement("div");
         let pagesContainer = document.createElement("div");
-        let readContainer = document.createElement("div");
+
+        let changeReadStatus = document.createElement("input");
+        changeReadStatus.setAttribute("type", "checkbox");
+        changeReadStatus.setAttribute("name", "readStatus");
+        changeReadStatus.checked = book.hasRead;
+        if (book.hasRead) {
+            card.classList.add("read");
+        }
+        let text = document.createElement("div");
+        text.textContent = "Done";
         let removeContainer = document.createElement("div");
+        removeContainer.appendChild(text);
+        removeContainer.appendChild(changeReadStatus);
+        removeContainer.style.display = "flex"
+        removeContainer.style.justifyContent = "flex-start";
+        removeContainer.style.alignItems = "center"
+        removeContainer.style.gap = "10px"
         let removeBtn = document.createElement("button");
         removeBtn.setAttribute("class", "remove-btn");
         removeBtn.dataset.bookNumber = myLibrary.indexOf(book);
-        removeBtn.textContent = "Remove";
+        removeBtn.textContent = "🗑️";
+        removeBtn.style.maxHeight = "30px";
         
 
         titleContainer.textContent = book.title;
         titleContainer.style.fontSize = "1.2rem";
         titleContainer.style.fontWeight = "bold";
         authorContainer.textContent = book.author;
-        pagesContainer.textContent = `${book.pages} pages` ;
-        readContainer.textContent = (book.hasRead) ? "You have read this book." : "You have not read this book yet.";
-        
+        pagesContainer.textContent = `${book.pages} pages`;
         removeContainer.appendChild(removeBtn);
         card.appendChild(titleContainer);
         card.appendChild(authorContainer);
         card.appendChild(pagesContainer);
-        card.appendChild(readContainer);
         card.appendChild(removeContainer);
         container.appendChild(card);
 
@@ -58,6 +72,11 @@ function displayBooks(){
             myLibrary.splice(index, 1);
             displayBooks();
         })
+
+        changeReadStatus.addEventListener("click", () => {
+            book.changeReadStatus();
+            displayBooks();
+        } )
     }
 }
 
@@ -78,7 +97,12 @@ cancelBtn.addEventListener("click", () => dialog.close());
 
 submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    let newBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readStatus.value);
+    if (!newBookForm.checkValidity()){
+        newBookForm.reportValidity();
+        return;
+    }
+    
+    let newBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readStatus.checked);
     dialog.close();
     addBookToLibrary(newBook);
     displayBooks();
@@ -88,3 +112,4 @@ submitBtn.addEventListener("click", (event) => {
 const removeButtons = Array.from(document.querySelectorAll(".remove-btn"));
 
 
+console.log(myLibrary)
